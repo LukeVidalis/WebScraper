@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 //Main Link: http://www.betfellas.gr/tipster/SerSira/?period=2018&page=1
 //Created by Luke Vidalis
+// Test
 public class infoRetriever {
 	final static String url = "http://www.betfellas.gr/tipster/SerSira/?period=2018&page=";
 
