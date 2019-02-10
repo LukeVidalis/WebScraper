@@ -33,8 +33,7 @@ public class infoRetriever {
 			TableRow tr = new TableRow(rows.get(i));
 			rowsList.add(tr);
 
-//			String rowText = row.text();
-//			System.out.println(rowText + "\n");
+
 		}
 		DataSaver ds = new DataSaver();
 		ds.addData(rowsList);
