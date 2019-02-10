@@ -14,24 +14,21 @@ public class TableRow {
 	Elements fields;
 
 	public TableRow(Element row) {
-		fields = row.getElementsByTag("td");
-//		for (Element r : fields) {
-//			System.out.println(r.text() + "\n");
-//		}
-//		System.out.println(fields.size());
-		match = row.getElementsByTag("th").text();
+		
+		fields = row.getElementsByTag(Values.td);
+		match = row.getElementsByTag(Values.th).text();
 		setup(fields);
 	
 	}
 
 	private void setup(Elements fields) {
-		date=fields.get(1).text();
-		comp=fields.get(2).text();
-		bet=fields.get(3).text();
-		odds=fields.get(4).text().replace(',', '.');
-		stake=Double.parseDouble(fields.get(5).text());
-		result=fields.get(7).text();
-		Return=fields.get(8).text();
+		date=fields.get(Values.dateId).text();
+		comp=fields.get(Values.compId).text();
+		bet=fields.get(Values.betId).text().replace(Values.comma, Values.dot);
+		odds=fields.get(Values.oddsId).text().replace(Values.comma, Values.dot);
+		stake=Double.parseDouble(fields.get(Values.stakeId).text());
+		result=fields.get(Values.resultId).text();
+		Return=fields.get(Values.returnId).text();
 	}
 	
 	public String toString() {

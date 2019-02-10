@@ -7,10 +7,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 //Main Link: http://www.betfellas.gr/tipster/SerSira/?period=2018&page=1
-//Created by Luke Vidalis
-// Test
+
 public class infoRetriever {
-	final static String url = "http://www.betfellas.gr/tipster/SerSira/?period=2018&page=";
+	final static String url = Values.url;
 
 	public infoRetriever() throws IOException {
 		getSite();
@@ -19,9 +18,9 @@ public class infoRetriever {
 	private void getSite() throws IOException {
 		Document doc = Jsoup.connect(url + "1").get();
 
-		Elements tables = doc.getElementsByClass("table table-striped");
+		Elements tables = doc.getElementsByClass(Values.tts);
 		Element tipTable = tables.last();
-		Elements rows = tipTable.getElementsByTag("tr");
+		Elements rows = tipTable.getElementsByTag(Values.tr);
 
 		saveData(rows);
 
@@ -33,7 +32,6 @@ public class infoRetriever {
 		for (int i = 1; i < rows.size(); i++) {
 			TableRow tr = new TableRow(rows.get(i));
 			rowsList.add(tr);
-
 
 		}
 		DataSaver ds = new DataSaver();
