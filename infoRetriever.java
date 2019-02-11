@@ -19,16 +19,21 @@ public class infoRetriever {
 	}
 
 	private void getSite() throws IOException {
-		for(int i=0;i<20;i++) {
-			Document doc = Jsoup.connect(url + i).get();
+		Boolean hasNext = true;
+		int counter = 0;
+		while(hasNext) {
+			Document doc = Jsoup.connect(url + counter).get();
 			Elements tables = doc.getElementsByClass(Values.tts);
 			Element tipTable = tables.last();
 			Elements rows = tipTable.getElementsByTag(Values.tr);
-
-			saveRow(rows);
+			if(rows.size() != 1) {
+				saveRow(rows);
+				counter++;
+			} else {
+				hasNext = false;
+			}
 		}
 		saveData();
-
 	}
 	
 	private void saveRow(Elements rows) {
