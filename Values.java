@@ -32,5 +32,9 @@ public class Values {
 	//String Concatenation
 	protected static final int startIndex = 8;
 	protected static final int endIndexOffset = 4;
+	
+	//CSV Header
+	protected static final String header="SPORT, DATE, COMP, MATCH-UP, BET, ODDS, STAKE, BOOK, RESULT, +/-";
+
 
 }

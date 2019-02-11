@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DataSaver {
 	public void addData(ArrayList<TableRow> rowsList) throws IOException {
 		FileWriter pw = new FileWriter("Bets.csv", true);
+		pw.append(Values.header+"\n");
 
 		for (int i = 0; i < rowsList.size(); i++) {
 
