@@ -6,6 +6,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+
+
 //Main Link: http://www.betfellas.gr/tipster/SerSira/?period=2018&page=1
 
 public class infoRetriever {
