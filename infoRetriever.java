@@ -11,7 +11,7 @@ import org.jsoup.select.Elements;
 //Main Link: http://www.betfellas.gr/tipster/SerSira/?period=2018&page=1
 
 public class infoRetriever {
-	final static String url = "http://www.betfellas.gr/tipster/SerSira/?period=2018&page=";
+	final static String url = Values.url;
 	private ArrayList<TableRow> rowsList = new ArrayList<TableRow>();
 
 	public infoRetriever() throws IOException {
@@ -21,9 +21,9 @@ public class infoRetriever {
 	private void getSite() throws IOException {
 		for(int i=0;i<20;i++) {
 			Document doc = Jsoup.connect(url + i).get();
-			Elements tables = doc.getElementsByClass("table table-striped");
+			Elements tables = doc.getElementsByClass(Values.tts);
 			Element tipTable = tables.last();
-			Elements rows = tipTable.getElementsByTag("tr");
+			Elements rows = tipTable.getElementsByTag(Values.tr);
 
 			saveRow(rows);
 		}
