@@ -3,40 +3,63 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class TableRow {
+	private String sport;
 	private String date;
 	private String comp;
 	private String match;
 	private String bet;
 	private String odds;
 	private double stake;
+	private String book;
 	private String result;
 	private String Return;
-	Elements fields;
+	private Elements fields;
 
 	public TableRow(Element row) {
-		
+
 		fields = row.getElementsByTag(Values.td);
-		match = row.getElementsByTag(Values.th).text().replace(Values.comma, Values.dot);;
+		match = row.getElementsByTag(Values.th).text().replace(Values.comma, Values.dot);
+		
 		setup(fields);
-	
+
 	}
 
 	private void setup(Elements fields) {
-		date=fields.get(Values.dateId).text();
-		comp=fields.get(Values.compId).text();
-		bet=fields.get(Values.betId).text().replace(Values.comma, Values.dot);
-		odds=fields.get(Values.oddsId).text().replace(Values.comma, Values.dot);
-		stake=Double.parseDouble(fields.get(Values.stakeId).text());
-		result=fields.get(Values.resultId).text();
-		Return=fields.get(Values.returnId).text();
+		sport = fields.get(Values.sportId).getElementsByTag(Values.img).attr(Values.src);
+		date = fields.get(Values.dateId).text();
+		comp = fields.get(Values.compId).text();
+		bet = fields.get(Values.betId).text().replace(Values.comma, Values.dot);
+		odds = fields.get(Values.oddsId).text().replace(Values.comma, Values.dot);
+		stake = Double.parseDouble(fields.get(Values.stakeId).text());
+		book = fields.get(Values.bookId).getElementsByTag(Values.img).attr(Values.src);
+		result = fields.get(Values.resultId).text();
+		Return = fields.get(Values.returnId).text();
+
+		sport = formatPath(sport);
+		book = formatPath(book);
 	}
-	
+
 	public String toString() {
-		String s = date+", "+comp+", "+match+", "+bet+", "+odds+", "+stake+", "+result+", "+Return;
+		String s = sport + ", " + date + ", " + comp + ", " + match + ", " + bet + ", " + odds + ", " + stake + ", "
+				+ book + ", " + result + ", " + Return;
 		return s;
 	}
+
+	private String formatPath(String s) {
+		String str = s.substring(Values.startIndex, s.length() - Values.endIndexOffset);
+		return str;
+	}
+
 	public String getDate() {
 		return date;
+	}
+
+	public String getSport() {
+		return sport;
+	}
+
+	public String getBook() {
+		return book;
 	}
 
 	public String getComp() {
