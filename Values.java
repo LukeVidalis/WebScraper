@@ -36,5 +36,8 @@ public class Values {
 	//CSV Header
 	protected static final String header="SPORT, DATE, COMP, MATCH-UP, BET, ODDS, STAKE, BOOK, RESULT, +/-";
 
+	//Index
+	protected static final int entryIndex = 0;
+
 
 }

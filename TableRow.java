@@ -19,9 +19,6 @@ public class TableRow {
 
 		fields = row.getElementsByTag(Values.td);
 		match = row.getElementsByTag(Values.th).text().replace(Values.comma, Values.dot);
-		match = match.replace('′', '\'');
-		match = match.replace('–', '-');
-		
 		setup(fields);
 
 	}

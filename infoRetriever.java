@@ -34,7 +34,7 @@ public class infoRetriever {
 	private void saveRow(Elements rows) {
 		for (int i = 1; i < rows.size(); i++) {
 			TableRow tr = new TableRow(rows.get(i));
-			rowsList.add(tr);
+			rowsList.add(Values.entryIndex,tr);
 		}
 	}
 
