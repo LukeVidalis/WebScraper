@@ -16,7 +16,7 @@ public class TableRow {
 	public TableRow(Element row) {
 		
 		fields = row.getElementsByTag(Values.td);
-		match = row.getElementsByTag(Values.th).text();
+		match = row.getElementsByTag(Values.th).text().replace(Values.comma, Values.dot);;
 		setup(fields);
 	
 	}

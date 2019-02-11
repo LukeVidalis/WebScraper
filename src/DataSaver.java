@@ -9,9 +9,11 @@ public class DataSaver {
 		for (int i = 0; i < rowsList.size(); i++) {
 
 			pw.append(rowsList.get(i).toString());
-			pw.append("\n");
-			if (i != rowsList.size() - 1)
+			
+			if (i != rowsList.size() - 1) {
 				pw.append(",");
+			}
+			pw.append("\n");
 		}
 		pw.flush();
 		pw.close();
