@@ -26,7 +26,7 @@ public class infoRetriever {
 			Elements tables = doc.getElementsByClass(Values.tts);
 			Element tipTable = tables.last();
 			Elements rows = tipTable.getElementsByTag(Values.tr);
-			if(rows.size() != 1) {
+			if(rows.size() > 1) {
 				saveRow(rows);
 				counter++;
 			} else {
