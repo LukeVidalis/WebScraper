@@ -13,6 +13,7 @@ public class TableRow {
 	private String book;
 	private String result;
 	private String Return;
+	private String betType;
 	private Elements fields;
 
 	public TableRow(Element row) {
@@ -36,10 +37,12 @@ public class TableRow {
 
 		sport = formatPath(sport);
 		book = formatPath(book);
+		
+		setBetType();
 	}
 
 	public String toString() {
-		String s = sport + ", " + date + ", " + comp + ", " + match + ", " + bet + ", " + odds + ", " + stake + ", "
+		String s = sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds + ", " + stake + ", "
 				+ book + ", " + result + ", " + Return;
 		return s;
 	}
@@ -87,5 +90,13 @@ public class TableRow {
 
 	public String getReturn() {
 		return Return;
+	}
+	
+	public void setBetType() {
+		if(Character.isDigit(match.charAt(0))) {
+			this.betType = "Live";
+		} else {
+			this.betType = "Pre-Match";
+		}
 	}
 }
