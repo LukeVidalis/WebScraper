@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
@@ -22,7 +23,9 @@ public class infoRetriever {
 		Boolean hasNext = true;
 		int counter = 0;
 		while(hasNext) {
-			Document doc = Jsoup.connect(url + counter).get();
+			Document doc = Jsoup.parse(new URL(url+counter).openStream(), "UTF-8", url+counter);
+
+			
 			Elements tables = doc.getElementsByClass(Values.tts);
 			Element tipTable = tables.last();
 			Elements rows = tipTable.getElementsByTag(Values.tr);
