@@ -6,8 +6,17 @@ import java.io.FileOutputStream;
 
 
 public class DataSaver {
+	
+	private String period;
+	
+	public DataSaver(String period, ArrayList<TableRow> rowsList) throws IOException {
+		setPeriod(period);
+		addData(rowsList);
+	}
+	
 	public void addData(ArrayList<TableRow> rowsList) throws IOException {
-		PrintStream pw = new PrintStream(new FileOutputStream("Bets.csv"), true, "UTF-8");
+		String fileName = "Bets(" + period + ").csv";
+		PrintStream pw = new PrintStream(new FileOutputStream(fileName), true, "UTF-8");
 		
 		byte[] bom = new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF };
 		pw.write(bom);
@@ -28,4 +37,10 @@ public class DataSaver {
 		pw.flush();
 		pw.close();
 	}
+	
+	private void setPeriod(String period){
+		int previous = Integer.parseInt(period) - 1;
+		this.period = previous + "-" + period;
+	}
+	
 }
