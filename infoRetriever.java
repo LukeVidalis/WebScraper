@@ -42,6 +42,7 @@ public class infoRetriever {
 
 			}
 			saveData(p);
+			rowsList.clear();
 		}
 	}
 	
