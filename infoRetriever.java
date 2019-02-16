@@ -13,27 +13,40 @@ import org.jsoup.select.Elements;
 public class infoRetriever {
 	final static String url = Values.url;
 	private ArrayList<TableRow> rowsList = new ArrayList<TableRow>();
+	private ArrayList<String> periods = new ArrayList<String>();
 
 	public infoRetriever() throws IOException {
+		getPeriods();
 		getSite();
 	}
 
 	private void getSite() throws IOException {
-		Boolean hasNext = true;
-		int counter = 0;
-		while(hasNext) {
-			Document doc = Jsoup.connect(url + counter).get();
-			Elements tables = doc.getElementsByClass(Values.tts);
-			Element tipTable = tables.last();
-			Elements rows = tipTable.getElementsByTag(Values.tr);
-			if(rows.size() > 1) {
-				saveRow(rows);
-				counter++;
-			} else {
-				hasNext = false;
+		for(String p : periods) {
+			Boolean hasNext = true;
+			int counter = 0;
+			while(hasNext) {
+				Document doc = Jsoup.connect(url + "?period=" + p + "&page=" + counter).get();
+				Elements tables = doc.getElementsByClass(Values.tts);
+				Element tipTable = tables.last();
+				Elements rows = tipTable.getElementsByTag(Values.tr);
+				if(rows.size() > 1) {
+					saveRow(rows);
+					counter++;
+				} else {
+					hasNext = false;
+				}
 			}
+			saveData(p);
 		}
-		saveData();
+	}
+	
+	private void getPeriods() throws IOException {
+		Document doc = Jsoup.connect(url).get();
+		Elements dropDown = doc.getElementsByClass(Values.fc);
+		Elements values = dropDown.get(0).getElementsByAttribute(Values.vl);
+		for(Element e:values) {
+			periods.add(e.attr(Values.vl));
+		}
 	}
 	
 	private void saveRow(Elements rows) {
@@ -43,9 +56,8 @@ public class infoRetriever {
 		}
 	}
 
-	private void saveData() throws IOException {
-		DataSaver ds = new DataSaver();
-		ds.addData(rowsList);
+	private void saveData(String period) throws IOException {
+		DataSaver ds = new DataSaver(period, rowsList);
 		output(rowsList);
 	}
 	

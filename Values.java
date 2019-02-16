@@ -2,7 +2,7 @@
 public class Values {
 
 	//Website Link
-	protected static final String url = "http://www.betfellas.gr/tipster/SerSira/?period=2018&page=";
+	protected static final String url = "http://www.betfellas.gr/tipster/SerSira/";
 
 	// ID values
 	protected static final int sportId = 0;
@@ -25,6 +25,8 @@ public class Values {
 	protected static final String img = "img";
 	protected static final String tr = "tr";
 	protected static final String tts ="table table-striped";
+	protected static final String fc ="form-control";
+	protected static final String vl ="value";
 	
 	//Attributes
 	protected static final String src="src";
