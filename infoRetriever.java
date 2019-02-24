@@ -18,6 +18,7 @@ public class infoRetriever {
 	public infoRetriever() throws IOException {
 		for (int i = 0; i < 4; i++) {
 			getPeriods(url[i]);
+			System.out.println("Tipster "+Values.url[i].substring(32, Values.url[i].length()-1));
 			getSite(url[i]);
 		}
 	}
@@ -28,8 +29,9 @@ public class infoRetriever {
 			Boolean firstRun = true;
 			int counter = 0;
 			int totalPages = 100;
-			do {
+			System.out.println("Period: "+p);
 
+			do {
 				Document doc = Jsoup.parse(new URL(url + "?period=" + p + "&page=" + counter).openStream(), "UTF-8",
 						url + "?period=" + p + "&page=" + counter);
 
@@ -41,6 +43,7 @@ public class infoRetriever {
 					totalPages = getMaxPages(pagesNum);
 					firstRun = false;
 				}
+				System.out.println("Page "+counter);
 				if (rows.size() > 1) {
 					saveRow(rows);
 					counter++;
@@ -79,13 +82,13 @@ public class infoRetriever {
 			TableRow tr = new TableRow(rows.get(i));
 			rowsList.add(Values.entryIndex, tr);
 			recordCounter++;
-			System.out.println(recordCounter);
+			//System.out.println(recordCounter);
 		}
 	}
 
 	private void saveData(String tipster, String period) throws IOException {
 		DataSaver ds = new DataSaver(tipster, period, rowsList);
-		output(rowsList);
+		//output(rowsList);
 	}
 
 	private void output(ArrayList<TableRow> rowsList) {

@@ -1,5 +1,8 @@
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class MainScrapper {
 
@@ -7,9 +10,13 @@ public class MainScrapper {
 		long startTime = System.currentTimeMillis();
 		new infoRetriever();
 		long endTime = System.currentTimeMillis();
-		long runTime = (endTime - startTime)/1000;
-		System.out.println("Runtime (seconds): " + runTime);
-		//new Menu();
+		long runTimeMillis = (endTime - startTime);
+	
+	    Date date = new Date(runTimeMillis);
+	    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
+	    formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+	    String formatted = formatter.format(date);
+	    System.out.println("Runtime: " + formatted);
 	}
 
 }
