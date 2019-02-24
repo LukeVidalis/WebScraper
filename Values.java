@@ -44,5 +44,11 @@ public class Values {
 	//Index
 	protected static final int entryIndex = 0;
 
+	//Class id
+	protected static final String displayResult="displayResult";
+	
+	//Misc
+	protected static final int betsPerPage = 25;
+
 
 }

@@ -7,8 +7,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
-
 //Main Link: http://www.betfellas.gr/tipster/SerSira/?period=2018&page=1
 
 public class infoRetriever {
@@ -18,51 +16,68 @@ public class infoRetriever {
 	private int recordCounter = 0;
 
 	public infoRetriever() throws IOException {
-		for(int i=2;i<4;i++) {
+		for (int i = 2; i < 4; i++) {
 			getPeriods(url[i]);
 			getSite(url[i]);
 		}
 	}
 
 	private void getSite(String url) throws IOException {
-			for(String p : periods) {
-				recordCounter = 0;
-				Boolean hasNext = true;
-				int counter = 0;
-				while(hasNext) {
-					
-					Document doc = Jsoup.parse(new URL(url+ "?period=" + p + "&page=" + counter).openStream(), "UTF-8", url+ "?period=" + p + "&page=" + counter);
-					
-					Elements tables = doc.getElementsByClass(Values.tts);
-					Element tipTable = tables.last();
-					Elements rows = tipTable.getElementsByTag(Values.tr);
-					if(rows.size() > 1) {
-						saveRow(rows);
-						counter++;
-					} else {
-						hasNext = false;
-					}
+		for (String p : periods) {
+			recordCounter = 0;
+			Boolean firstRun = true;
+			int counter = 0;
+			int totalPages = 100;
+			do {
 
+				Document doc = Jsoup.parse(new URL(url + "?period=" + p + "&page=" + counter).openStream(), "UTF-8",
+						url + "?period=" + p + "&page=" + counter);
+
+				Elements tables = doc.getElementsByClass(Values.tts);
+				Element tipTable = tables.last();
+				Elements rows = tipTable.getElementsByTag(Values.tr);
+				Elements pagesNum = doc.getElementsByClass(Values.displayResult);
+				if (firstRun) {
+					totalPages = getMaxPages(pagesNum);
+					firstRun = false;
 				}
-				String[] splits = url.split("/");
-				saveData(splits[splits.length-1], p);
-				rowsList.clear();
-			}
+				if (rows.size() > 1) {
+					saveRow(rows);
+					counter++;
+				} else {
+					// hasNext = false;
+				}
+
+			} while (counter < totalPages);
+			String[] splits = url.split("/");
+			saveData(splits[splits.length - 1], p);
+			rowsList.clear();
+		}
 	}
-	
+
 	private void getPeriods(String url) throws IOException {
 		Document doc = Jsoup.connect(url).get();
 		Elements dropDown = doc.getElementsByClass(Values.fc);
 		Elements values = dropDown.get(0).getElementsByAttribute(Values.vl);
-		for(Element e:values) {
+		for (Element e : values) {
 			periods.add(e.attr(Values.vl));
 		}
 	}
-	
+
+	private int getMaxPages(Elements pageNumText) {
+		String s = pageNumText.get(0).text();
+		s = s.substring(s.length() - 11, s.length());
+		s = s.replaceAll("\\D+", "");
+		double bets = Double.parseDouble(s);
+		int maxPages = (int) Math.ceil(bets / Values.betsPerPage);
+		System.out.println("Total Pages: " + maxPages);
+		return maxPages;
+	}
+
 	private void saveRow(Elements rows) {
 		for (int i = 1; i < rows.size(); i++) {
 			TableRow tr = new TableRow(rows.get(i));
-			rowsList.add(Values.entryIndex,tr);
+			rowsList.add(Values.entryIndex, tr);
 			recordCounter++;
 			System.out.println(recordCounter);
 		}
@@ -72,8 +87,6 @@ public class infoRetriever {
 		DataSaver ds = new DataSaver(tipster, period, rowsList);
 		output(rowsList);
 	}
-	
-	
 
 	private void output(ArrayList<TableRow> rowsList) {
 		for (TableRow r : rowsList) {
