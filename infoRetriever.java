@@ -16,7 +16,7 @@ public class infoRetriever {
 	private int recordCounter = 0;
 
 	public infoRetriever() throws IOException {
-		for (int i = 2; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 			getPeriods(url[i]);
 			getSite(url[i]);
 		}
