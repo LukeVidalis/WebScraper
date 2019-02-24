@@ -16,7 +16,6 @@ public class infoRetriever {
 	private ArrayList<TableRow> rowsList = new ArrayList<TableRow>();
 	private ArrayList<String> periods = new ArrayList<String>();
 	private int recordCounter = 0;
-	private boolean exists = false;
 
 	public infoRetriever() throws IOException {
 		for(int i=2;i<4;i++) {
@@ -29,9 +28,8 @@ public class infoRetriever {
 			for(String p : periods) {
 				recordCounter = 0;
 				Boolean hasNext = true;
-				exists = false;
 				int counter = 0;
-				while(hasNext && exists == false) {
+				while(hasNext) {
 					
 					Document doc = Jsoup.parse(new URL(url+ "?period=" + p + "&page=" + counter).openStream(), "UTF-8", url+ "?period=" + p + "&page=" + counter);
 					
@@ -64,19 +62,9 @@ public class infoRetriever {
 	private void saveRow(Elements rows) {
 		for (int i = 1; i < rows.size(); i++) {
 			TableRow tr = new TableRow(rows.get(i));
-			if(rowsList.size() >= 25) {
-				for(int j=0;j<25;j++) {
-					if((tr).equals(rowsList.get(j))) {
-						exists = true;
-						break;
-					}
-				}
-			}
-			if(exists == false) {
-				rowsList.add(Values.entryIndex,tr);
-				recordCounter++;
-				System.out.println(recordCounter);
-			}
+			rowsList.add(Values.entryIndex,tr);
+			recordCounter++;
+			System.out.println(recordCounter);
 		}
 	}
 
