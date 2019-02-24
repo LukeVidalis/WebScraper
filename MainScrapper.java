@@ -8,7 +8,8 @@ public class MainScrapper {
 
 	public static void main(String[] args) throws IOException {
 		long startTime = System.currentTimeMillis();
-		new infoRetriever();
+		//new infoRetriever();
+		new Menu();
 		long endTime = System.currentTimeMillis();
 		long runTimeMillis = (endTime - startTime);
 	
