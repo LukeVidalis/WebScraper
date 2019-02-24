@@ -9,7 +9,7 @@ public class TableRow {
 	private String match;
 	private String bet;
 	private String odds;
-	private double stake;
+	private String stake;
 	private String book;
 	private String result;
 	private String Return;
@@ -30,7 +30,7 @@ public class TableRow {
 		comp = fields.get(Values.compId).text();
 		bet = fields.get(Values.betId).text().replace(Values.comma, Values.dot);
 		odds = fields.get(Values.oddsId).text().replace(Values.comma, Values.dot);
-		stake = Double.parseDouble(fields.get(Values.stakeId).text());
+		stake = fields.get(Values.stakeId).text();
 		book = fields.get(Values.bookId).getElementsByTag(Values.img).attr(Values.src);
 		result = fields.get(Values.resultId).text();
 		Return = fields.get(Values.returnId).text();
@@ -48,8 +48,12 @@ public class TableRow {
 	}
 
 	private String formatPath(String s) {
-		String str = s.substring(Values.startIndex, s.length() - Values.endIndexOffset);
-		return str;
+		if(s.endsWith(".jpg") || s.endsWith(".png")) {
+			String str = s.substring(Values.startIndex, s.length() - Values.endIndexOffset);
+			return str;
+		} else {
+			return s;
+		}
 	}
 
 	public String getDate() {
@@ -80,7 +84,7 @@ public class TableRow {
 		return odds;
 	}
 
-	public double getStake() {
+	public String getStake() {
 		return stake;
 	}
 

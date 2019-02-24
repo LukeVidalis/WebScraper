@@ -2,7 +2,10 @@
 public class Values {
 
 	//Website Link
-	protected static final String url = "http://www.betfellas.gr/tipster/SerSira/";
+	protected static final String[] url = new String[]{"http://www.betfellas.gr/tipster/SerSira/", 
+			"http://www.betfellas.gr/tipster/Vito/",
+			"http://www.betfellas.gr/tipster/Betol/",
+			"http://www.betfellas.gr/tipster/1926/"};
 
 	// ID values
 	protected static final int sportId = 0;

@@ -8,14 +8,16 @@ import java.io.FileOutputStream;
 public class DataSaver {
 	
 	private String period;
+	private String tipster;
 	
-	public DataSaver(String period, ArrayList<TableRow> rowsList) throws IOException {
+	public DataSaver(String tipster, String period, ArrayList<TableRow> rowsList) throws IOException {
+		setTipster(tipster);
 		setPeriod(period);
 		addData(rowsList);
 	}
 	
 	public void addData(ArrayList<TableRow> rowsList) throws IOException {
-		String fileName = "Bets(" + period + ").csv";
+		String fileName = tipster + "-Bets(" + period + ").csv";
 		PrintStream pw = new PrintStream(new FileOutputStream(fileName), true, "UTF-8");
 		
 		byte[] bom = new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF };
@@ -42,5 +44,11 @@ public class DataSaver {
 		int previous = Integer.parseInt(period) - 1;
 		this.period = previous + "-" + period;
 	}
+
+	private void setTipster(String tipster) {
+		this.tipster = tipster;
+	}
+	
+	
 	
 }
