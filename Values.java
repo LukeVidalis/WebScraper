@@ -39,7 +39,7 @@ public class Values {
 	protected static final int endIndexOffset = 4;
 	
 	//CSV Header
-	protected static final String header="SPORT, DATE, COMP, BET-TYPE, MATCH-UP, BET, ODDS, STAKE, BOOK, RESULT, +/-";
+	protected static final String header="ID, SPORT, DATE, COMP, BET-TYPE, MATCH-UP, BET, ODDS, STAKE, BOOK, RESULT, +/-";
 
 	//Index
 	protected static final int entryIndex = 0;
@@ -49,6 +49,6 @@ public class Values {
 	
 	//Misc
 	protected static final int betsPerPage = 25;
-
+	protected static final char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
 }

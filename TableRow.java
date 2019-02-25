@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -15,9 +17,12 @@ public class TableRow {
 	private String Return;
 	private String betType;
 	private Elements fields;
+	private boolean multibet;
+	private StringSplitter ss;
+	private int id;
 
-	public TableRow(Element row) {
-
+	public TableRow(Element row, int id) {
+		this.id = id;
 		fields = row.getElementsByTag(Values.td);
 		match = row.getElementsByTag(Values.th).text().replace(Values.comma, Values.dot);
 		setup(fields);
@@ -37,18 +42,42 @@ public class TableRow {
 
 		sport = formatPath(sport);
 		book = formatPath(book);
-		
+		ss = new StringSplitter(match);
+
+		multibet = ss.matchFound();
 		setBetType();
 	}
 
 	public String toString() {
-		String s = sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds + ", " + stake + ", "
-				+ book + ", " + result + ", " + Return;
+		String s = "";
+		if (!multibet) {
+			s = id + ", " + sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds
+					+ ", " + stake + ", " + book + ", " + result + ", " + Return;
+			return s;
+		} else {
+			return splitToString();
+		}
+	}
+
+	public String splitToString() {
+		String s = "";
+		ArrayList<String> bets = ss.getBets();
+		String[] oddsSplit = odds.split(" ");
+		String[] compSplit = comp.split(" ");
+		String[] dateSplit = (date.split("(?<=\\G............)"));
+		for (int i = 0; i < bets.size(); i++) {
+			s = s + id +Values.alphabet[i]+ ", " + sport + ", " + dateSplit[i] + ", " + compSplit[i] + ", " + betType + ", " + bets.get(i) + ", " + bet
+					+ ", " + oddsSplit[i] + ", " + stake + ", " + book + ", " +result;
+			if(i==0)
+				s = s + ", " +Return;
+			if (i < bets.size() - 1)
+				s = s + "\n";
+		}
 		return s;
 	}
 
 	private String formatPath(String s) {
-		if(s.endsWith(".jpg") || s.endsWith(".png")) {
+		if (s.endsWith(".jpg") || s.endsWith(".png")) {
 			String str = s.substring(Values.startIndex, s.length() - Values.endIndexOffset);
 			return str;
 		} else {
@@ -95,9 +124,9 @@ public class TableRow {
 	public String getReturn() {
 		return Return;
 	}
-	
+
 	public void setBetType() {
-		if(Character.isDigit(match.charAt(0))) {
+		if (Character.isDigit(match.charAt(0))) {
 			this.betType = "Live";
 		} else {
 			this.betType = "Pre-Match";

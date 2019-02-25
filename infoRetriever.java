@@ -14,9 +14,10 @@ public class infoRetriever {
 	private ArrayList<TableRow> rowsList = new ArrayList<TableRow>();
 	private ArrayList<String> periods = new ArrayList<String>();
 	private int recordCounter = 0;
+	private int maxBets = 0;
 
 	public infoRetriever() throws IOException {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 1; i++) {
 			getPeriods(url[i]);
 			System.out.println("Tipster "+Values.url[i].substring(32, Values.url[i].length()-1));
 			getSite(url[i]);
@@ -72,6 +73,7 @@ public class infoRetriever {
 		s = s.substring(s.length() - 11, s.length());
 		s = s.replaceAll("\\D+", "");
 		double bets = Double.parseDouble(s);
+		maxBets=Integer.parseInt(s);
 		int maxPages = (int) Math.ceil(bets / Values.betsPerPage);
 		System.out.println("Total Pages: " + maxPages);
 		return maxPages;
@@ -79,7 +81,7 @@ public class infoRetriever {
 
 	private void saveRow(Elements rows) {
 		for (int i = 1; i < rows.size(); i++) {
-			TableRow tr = new TableRow(rows.get(i));
+			TableRow tr = new TableRow(rows.get(i),maxBets-recordCounter);
 			rowsList.add(Values.entryIndex, tr);
 			recordCounter++;
 			//System.out.println(recordCounter);
