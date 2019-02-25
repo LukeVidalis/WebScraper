@@ -17,7 +17,7 @@ public class infoRetriever {
 	private int maxBets = 0;
 
 	public infoRetriever() throws IOException {
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 4; i++) {
 			getPeriods(url[i]);
 			System.out.println("Tipster "+Values.url[i].substring(32, Values.url[i].length()-1));
 			getSite(url[i]);
@@ -54,12 +54,15 @@ public class infoRetriever {
 
 			} while (counter < totalPages);
 			String[] splits = url.split("/");
-			saveData(splits[splits.length - 1], p);
+			if(!rowsList.isEmpty()){
+				saveData(splits[splits.length - 1], p);
+			}
 			rowsList.clear();
 		}
 	}
 
 	private void getPeriods(String url) throws IOException {
+		periods.clear();
 		Document doc = Jsoup.connect(url).get();
 		Elements dropDown = doc.getElementsByClass(Values.fc);
 		Elements values = dropDown.get(0).getElementsByAttribute(Values.vl);
