@@ -8,7 +8,7 @@ public class StringSplitter {
 	private ArrayList<String> bets = new ArrayList<String>();
 	private int cutoff = 0;
 	private int matchIndex = 0;
-	final String regex = "\\(([0-9]*?)\\)";
+	final String regex = "\\(([0-9]*?\\.?[0-9]*?)\\)";
 	final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 	Matcher matcher=null;
 	private String string;

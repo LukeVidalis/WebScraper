@@ -67,20 +67,31 @@ public class TableRow {
 		String[] oddsSplit = odds.split(" ");
 		String[] compSplit = comp.split(" ");
 		String[] dateSplit = (date.split("(?<=\\G............)"));
-		for (int i = 0; i < bets.size(); i++) {
-			s = s + id +Values.alphabet[i]+ ", " + sport + ", " + dateSplit[i] + ", " + compSplit[j] + ", " + betType + ", " + bets.get(i) + ", " + bet
-					+ ", " + oddsSplit[k] + ", " + stake + ", " + book + ", " +result;
-			if(compSplit.length == bets.size()) {
-				j++;
+		if(bets.size() < oddsSplit.length || bets.size() < compSplit.length || bets.size() < dateSplit.length) {
+			return fuckItMethod();
+		} else {
+			for (int i = 0; i < bets.size(); i++) {
+				s = s + id +Values.alphabet[i]+ ", " + sport + ", " + dateSplit[i] + ", " + compSplit[j] + ", " + betType + ", " + bets.get(i) + ", " + bet
+						+ ", " + oddsSplit[k] + ", " + stake + ", " + book + ", " +result;
+				if(compSplit.length == bets.size()) {
+					j++;
+				}
+				if(oddsSplit.length == bets.size()) {
+					k++;
+				}
+				if(i==0)
+					s = s + ", " +Return;
+				if (i < bets.size() - 1)
+					s = s + "\n";
 			}
-			if(oddsSplit.length == bets.size()) {
-				k++;
-			}
-			if(i==0)
-				s = s + ", " +Return;
-			if (i < bets.size() - 1)
-				s = s + "\n";
+			return s;
 		}
+	}
+	
+	private String fuckItMethod() {
+		String s = "";
+		s = id + ", " + sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds
+				+ ", " + stake + ", " + book + ", " + result + ", " + Return + "Possible error, please check.";
 		return s;
 	}
 
