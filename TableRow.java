@@ -61,13 +61,17 @@ public class TableRow {
 
 	public String splitToString() {
 		String s = "";
+		int k = 0;
 		ArrayList<String> bets = ss.getBets();
 		String[] oddsSplit = odds.split(" ");
 		String[] compSplit = comp.split(" ");
 		String[] dateSplit = (date.split("(?<=\\G............)"));
 		for (int i = 0; i < bets.size(); i++) {
-			s = s + id +Values.alphabet[i]+ ", " + sport + ", " + dateSplit[i] + ", " + compSplit[i] + ", " + betType + ", " + bets.get(i) + ", " + bet
+			s = s + id +Values.alphabet[i]+ ", " + sport + ", " + dateSplit[i] + ", " + compSplit[k] + ", " + betType + ", " + bets.get(i) + ", " + bet
 					+ ", " + oddsSplit[i] + ", " + stake + ", " + book + ", " +result;
+			if(compSplit.length == bets.size()) {
+				k++;
+			}
 			if(i==0)
 				s = s + ", " +Return;
 			if (i < bets.size() - 1)
