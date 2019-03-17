@@ -50,7 +50,8 @@ public class TableRow {
 
 	public String toString() {
 		String s = "";
-		if (!multibet) {
+		String[] oddsSplit = odds.split(" ");
+		if (!multibet & oddsSplit.length != 1) {
 			s = id + ", " + sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds
 					+ ", " + stake + ", " + book + ", " + result + ", " + Return;
 			return s;
@@ -67,27 +68,30 @@ public class TableRow {
 		String[] oddsSplit = odds.split(" ");
 		String[] compSplit = comp.split(" ");
 		String[] dateSplit = (date.split("(?<=\\G............)"));
+		try {
+			if (ss.getError() || bets.size() != oddsSplit.length) {
+				return contingencyMethod();
+			} else {
+				for (int i = 0; i < bets.size(); i++) {
+					s = s + id + Values.alphabet[i] + ", " + sport + ", " + dateSplit[i] + ", " + compSplit[j] + ", "
+							+ betType + ", " + bets.get(i) + ", " + bet + ", " + oddsSplit[k] + ", " + stake + ", "
+							+ book + ", " + result;
+					if (compSplit.length == bets.size()) {
+						j++;
+					}
+					if (oddsSplit.length == bets.size()) {
+						k++;
+					}
+					if (i == 0)
+						s = s + ", " + Return;
+					if (i < bets.size() - 1)
+						s = s + "\n";
+				}
 
-		if (ss.getError() || bets.size() != oddsSplit.length) {
-			return contingencyMethod();
-		} else {
-			for (int i = 0; i < bets.size(); i++) {
-				s = s + id + Values.alphabet[i] + ", " + sport + ", " + dateSplit[i] + ", " + compSplit[j] + ", "
-						+ betType + ", " + bets.get(i) + ", " + bet + ", " + oddsSplit[k] + ", " + stake + ", " + book
-						+ ", " + result;
-				if (compSplit.length == bets.size()) {
-					j++;
-				}
-				if (oddsSplit.length == bets.size()) {
-					k++;
-				}
-				if (i == 0)
-					s = s + ", " + Return;
-				if (i < bets.size() - 1)
-					s = s + "\n";
+				return s;
 			}
-
-			return s;
+		} catch (Exception e) {
+			return contingencyMethod();
 		}
 	}
 
