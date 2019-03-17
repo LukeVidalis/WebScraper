@@ -17,20 +17,19 @@ public class infoRetriever {
 	private int maxBets = 0;
 
 	public infoRetriever() throws IOException {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 2; i < 3; i++) {
 			getPeriods(url[i]);
-			System.out.println("Tipster "+Values.url[i].substring(32, Values.url[i].length()-1));
+			System.out.println("Tipster " + Values.url[i].substring(32, Values.url[i].length() - 1));
 			getSite(url[i]);
 		}
 	}
 
 	private void getSite(String url) throws IOException {
 		for (String p : periods) {
-			recordCounter = 0;
 			Boolean firstRun = true;
-			int counter = 0;
+			int counter = 30;
 			int totalPages = 100;
-			System.out.println("Period: "+p);
+			System.out.println("Period: " + p);
 
 			do {
 				Document doc = Jsoup.parse(new URL(url + "?period=" + p + "&page=" + counter).openStream(), "UTF-8",
@@ -44,7 +43,7 @@ public class infoRetriever {
 					totalPages = getMaxPages(pagesNum);
 					firstRun = false;
 				}
-				System.out.println("Page "+counter);
+				System.out.println("Page " + counter);
 				if (rows.size() > 1) {
 					saveRow(rows);
 					counter++;
@@ -54,7 +53,7 @@ public class infoRetriever {
 
 			} while (counter < totalPages);
 			String[] splits = url.split("/");
-			if(!rowsList.isEmpty()){
+			if (!rowsList.isEmpty()) {
 				saveData(splits[splits.length - 1], p);
 			}
 			rowsList.clear();
@@ -76,7 +75,7 @@ public class infoRetriever {
 		s = s.substring(s.length() - 11, s.length());
 		s = s.replaceAll("\\D+", "");
 		double bets = Double.parseDouble(s);
-		maxBets=Integer.parseInt(s);
+		maxBets = Integer.parseInt(s);
 		int maxPages = (int) Math.ceil(bets / Values.betsPerPage);
 		System.out.println("Total Pages: " + maxPages);
 		return maxPages;
@@ -84,16 +83,16 @@ public class infoRetriever {
 
 	private void saveRow(Elements rows) {
 		for (int i = 1; i < rows.size(); i++) {
-			TableRow tr = new TableRow(rows.get(i),maxBets-recordCounter);
+			TableRow tr = new TableRow(rows.get(i), maxBets - recordCounter);
 			rowsList.add(Values.entryIndex, tr);
 			recordCounter++;
-			//System.out.println(recordCounter);
+			// System.out.println(recordCounter);
 		}
 	}
 
 	private void saveData(String tipster, String period) throws IOException {
 		DataSaver ds = new DataSaver(tipster, period, rowsList);
-		//output(rowsList);
+		// output(rowsList);
 	}
 
 	private void output(ArrayList<TableRow> rowsList) {
