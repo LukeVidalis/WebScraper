@@ -39,7 +39,7 @@ public class Values {
 	protected static final int endIndexOffset = 4;
 	
 	//CSV Header
-	protected static final String header="ID, SPORT, DATE, COMP, BET-TYPE, MATCH-UP, BET, ODDS, STAKE, BOOK, RESULT, +/-";
+	protected static final String header="ID, SPORT, DATE, COMP, BET-TYPE, MATCH-UP, BET, ODDS, STAKE, BOOK, RESULT, +/-, ERROR CHECKING";
 
 	//Index
 	protected static final int entryIndex = 0;

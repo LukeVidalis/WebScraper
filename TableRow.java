@@ -51,7 +51,7 @@ public class TableRow {
 	public String toString() {
 		String s = "";
 		String[] oddsSplit = odds.split(" ");
-		if (!multibet & oddsSplit.length != 1) {
+		if (!multibet && oddsSplit.length == 1) {
 			s = id + ", " + sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds
 					+ ", " + stake + ", " + book + ", " + result + ", " + Return;
 			return s;
