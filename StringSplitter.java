@@ -49,7 +49,7 @@ public class StringSplitter {
 		for(String s:bets){
 			output = output + " " + s;
 		}
-		if (output == string){
+		if (output.length() == string.length() + 1){
 			return false;
 		} else {
 			return true;
