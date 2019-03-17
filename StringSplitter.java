@@ -17,8 +17,8 @@ public class StringSplitter {
 	public StringSplitter(String string) {
 		this.string = string;
 		split();
-		if(matchFound())
-		error = checkError();
+		if (matchFound())
+			error = checkError();
 	}
 
 	private void split() {
@@ -45,14 +45,14 @@ public class StringSplitter {
 		return (bets.size() > 0);
 
 	}
-	
-	public Boolean checkError(){
+
+	public Boolean checkError() {
 		String output = "";
-		for(String s:bets){
+		for (String s : bets) {
 			output = output + " " + s;
 		}
 
-		if (output.length() == string.length() + 1){
+		if (output.length() == string.length() + 1) {
 			return false;
 		} else {
 			return true;

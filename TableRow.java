@@ -71,22 +71,22 @@ public class TableRow {
 		if (ss.getError()) {
 			return contingencyMethod();
 		} else {
-				for (int i = 0; i < bets.size(); i++) {
-					s = s + id + Values.alphabet[i] + ", " + sport + ", " + dateSplit[i] + ", " + compSplit[j] + ", "
-							+ betType + ", " + bets.get(i) + ", " + bet + ", " + oddsSplit[k] + ", " + stake + ", "
-							+ book + ", " + result;
-					if (compSplit.length == bets.size()) {
-						j++;
-					}
-					if (oddsSplit.length == bets.size()) {
-						k++;
-					}
-					if (i == 0)
-						s = s + ", " + Return;
-					if (i < bets.size() - 1)
-						s = s + "\n";
+			for (int i = 0; i < bets.size(); i++) {
+				s = s + id + Values.alphabet[i] + ", " + sport + ", " + dateSplit[i] + ", " + compSplit[j] + ", "
+						+ betType + ", " + bets.get(i) + ", " + bet + ", " + oddsSplit[k] + ", " + stake + ", " + book
+						+ ", " + result;
+				if (compSplit.length == bets.size()) {
+					j++;
 				}
-			
+				if (oddsSplit.length == bets.size()) {
+					k++;
+				}
+				if (i == 0)
+					s = s + ", " + Return;
+				if (i < bets.size() - 1)
+					s = s + "\n";
+			}
+
 			return s;
 		}
 	}

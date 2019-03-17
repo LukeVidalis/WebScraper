@@ -29,6 +29,7 @@ public class infoRetriever {
 			Boolean firstRun = true;
 			int counter = 30;
 			int totalPages = 100;
+
 			System.out.println("Period: " + p);
 
 			do {
