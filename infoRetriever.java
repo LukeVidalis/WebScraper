@@ -31,7 +31,7 @@ public class infoRetriever {
 			int counter = 0;
 			int totalPages = 100;
 			System.out.println("Period: "+p);
-
+			
 			do {
 				Document doc = Jsoup.parse(new URL(url + "?period=" + p + "&page=" + counter).openStream(), "UTF-8",
 						url + "?period=" + p + "&page=" + counter);

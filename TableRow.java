@@ -67,7 +67,12 @@ public class TableRow {
 		String[] oddsSplit = odds.split(" ");
 		String[] compSplit = comp.split(" ");
 		String[] dateSplit = (date.split("(?<=\\G............)"));
+<<<<<<< HEAD
 		if(ss.getError() || bets.size() != oddsSplit.length) {
+=======
+
+		if(ss.getError()) {
+>>>>>>> origin/Development
 			return contingencyMethod();
 		} else {
 			for (int i = 0; i < bets.size(); i++) {
@@ -88,6 +93,7 @@ public class TableRow {
 		}
 	}
 	
+
 	private String contingencyMethod() {
 		String s = "";
 		s = id + ", " + sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds
