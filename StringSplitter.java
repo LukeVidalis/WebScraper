@@ -10,11 +10,11 @@ public class StringSplitter {
 	private int matchIndex = 0;
 	final String regex = "\\(([0-9]*?\\.?[0-9]*?)\\)";
 	final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-	Matcher matcher=null;
+	Matcher matcher = null;
 	private String string;
 
 	public StringSplitter(String string) {
-		this.string =string;
+		this.string = string;
 		split();
 	}
 
@@ -27,7 +27,7 @@ public class StringSplitter {
 		for (int i = 0; i < states.size(); i++) {
 			matchIndex = string.indexOf(states.get(i), cutoff);
 			matchIndex = matchIndex + states.get(i).length();
-			//System.out.println("cutoff: " + cutoff + " match: " + matchIndex);
+			// System.out.println("cutoff: " + cutoff + " match: " + matchIndex);
 			bets.add(string.substring(cutoff, matchIndex));
 			cutoff = matchIndex + 1;
 		}
@@ -36,10 +36,11 @@ public class StringSplitter {
 //			System.out.println(bets.get(i));
 //		}
 	}
+
 	public boolean matchFound() {
-		
-		return (bets.size()>0);
-				
+
+		return (bets.size() > 0);
+
 	}
 
 	public ArrayList<String> getStates() {
