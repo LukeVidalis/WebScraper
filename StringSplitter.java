@@ -12,10 +12,12 @@ public class StringSplitter {
 	final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 	Matcher matcher = null;
 	private String string;
+	private Boolean error;
 
 	public StringSplitter(String string) {
 		this.string = string;
 		split();
+		error = checkError();
 	}
 
 	private void split() {
@@ -42,6 +44,18 @@ public class StringSplitter {
 		return (bets.size() > 0);
 
 	}
+	
+	public Boolean checkError(){
+		String output = "";
+		for(String s:bets){
+			output = output + " " + s;
+		}
+		if (output == string){
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	public ArrayList<String> getStates() {
 		return states;
@@ -49,6 +63,10 @@ public class StringSplitter {
 
 	public ArrayList<String> getBets() {
 		return bets;
+	}
+
+	public Boolean getError() {
+		return error;
 	}
 
 }
