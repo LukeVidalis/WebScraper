@@ -57,4 +57,17 @@ public class Values {
 			"Error 2: WebScrapper crashed while trying to get this bet.",
 			"Error 3: Number of odds doesn't match the number of matchups recognized.",
 			"Error 4: This bet is possibly an unrecognized accumulator."};
+	
+	//Console messages
+	protected static final String listMsg = "The list of tipsters currently is: ";
+	protected static final String initMessage = "Enter 4 values (between 0 and 1) with a space in between for each of the tipsters above in the order they appear. \n"
+			+ "A 1 indicates that the data of that tipsters will be recorded, whereas a 0 means it won't. \n"
+			+ "Example: 1 0 0 1 \n"
+			+ "Alternatively, enter a single String with the name of the tipster for their own data (Does NOT have to be listed) \n"
+			+ "Example: SerSira";
+	protected static final String question = "Would you like to run the program on all of them? (Yy/Nn)";
+	protected static final String questionErrorMsg = "Please input yes or no (Yy/Nn)";
+	protected static final String errorMsg1 = "Please input 4 distinct integers. (E.g. 1 0 0 1) or a single string (E.g. SerSira)";
+	protected static final String errorMsg2 = "Please input only 1's or 0's";
+	protected static final String errorMsg3 = "The tipster was not found. Please try again.";
 }
