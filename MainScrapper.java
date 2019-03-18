@@ -1,14 +1,11 @@
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.TimeZone;
-
 import org.jsoup.HttpStatusException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+
 
 public class MainScrapper {
 
@@ -78,7 +75,6 @@ public class MainScrapper {
 	private static void runCustomInt(int[] input) throws IOException {
 		long startTime = System.currentTimeMillis();
 		new infoRetriever(input);
-		//new Menu();
 		long endTime = System.currentTimeMillis();
 		long runTimeMillis = (endTime - startTime);
 	
@@ -92,7 +88,6 @@ public class MainScrapper {
 	private static void runCustomString(String input) throws IOException {
 		long startTime = System.currentTimeMillis();
 		new infoRetriever(input);
-		//new Menu();
 		long endTime = System.currentTimeMillis();
 		long runTimeMillis = (endTime - startTime);
 	

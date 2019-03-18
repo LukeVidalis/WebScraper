@@ -84,7 +84,7 @@ public class infoRetriever {
 
 	private int getMaxPages(Elements pageNumText) {
 		String s = pageNumText.get(0).text();
-		s = s.substring(s.length() - 11, s.length());
+		s = s.substring(s.length() - 9, s.length());
 		s = s.replaceAll("\\D+", "");
 		double bets = Double.parseDouble(s);
 		maxBets = Integer.parseInt(s);
