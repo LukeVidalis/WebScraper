@@ -50,5 +50,11 @@ public class Values {
 	//Misc
 	protected static final int betsPerPage = 25;
 	protected static final char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-
+	
+	//Error Codes
+	//Website Link
+	protected static final String[] errorCodes = new String[]{"Error 1: Part of the matchup text is not recognized.", 
+			"Error 2: WebScrapper crashed while trying to get this bet.",
+			"Error 3: Number of odds doesn't match the number of matchups recognized.",
+			"Error 4: This bet is possibly an unrecognized accumulator."};
 }

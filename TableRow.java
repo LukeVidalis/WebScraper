@@ -56,7 +56,12 @@ public class TableRow {
 					+ ", " + stake + ", " + book + ", " + result + ", " + Return;
 			return s;
 		} else {
-			return splitToString();
+			if (multibet) {
+				return splitToString();
+			} else {
+				return contingencyMethod(4);
+
+			}
 		}
 	}
 
@@ -69,8 +74,12 @@ public class TableRow {
 		String[] compSplit = comp.split(" ");
 		String[] dateSplit = (date.split("(?<=\\G............)"));
 		try {
-			if (ss.getError() || bets.size() != oddsSplit.length) {
-				return contingencyMethod();
+			if (ss.getError()) {
+				return contingencyMethod(1);
+
+			} else if (bets.size() != oddsSplit.length) {
+				return contingencyMethod(3);
+
 			} else {
 				for (int i = 0; i < bets.size(); i++) {
 					s = s + id + Values.alphabet[i] + ", " + sport + ", " + dateSplit[i] + ", " + compSplit[j] + ", "
@@ -91,14 +100,14 @@ public class TableRow {
 				return s;
 			}
 		} catch (Exception e) {
-			return contingencyMethod();
+			return contingencyMethod(2);
 		}
 	}
 
-	private String contingencyMethod() {
+	private String contingencyMethod(int errorCode) {
 		String s = "";
 		s = id + ", " + sport + ", " + date + ", " + comp + ", " + betType + ", " + match + ", " + bet + ", " + odds
-				+ ", " + stake + ", " + book + ", " + result + ", " + Return + ", Possible error; please check.";
+				+ ", " + stake + ", " + book + ", " + result + ", " + Return + ", " + Values.errorCodes[errorCode];
 		return s;
 	}
 

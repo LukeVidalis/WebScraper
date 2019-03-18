@@ -17,7 +17,7 @@ public class infoRetriever {
 	private int maxBets = 0;
 
 	public infoRetriever() throws IOException {
-		for (int i = 2; i < 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			getPeriods(url[i]);
 			System.out.println("Tipster " + Values.url[i].substring(32, Values.url[i].length() - 1));
 			getSite(url[i]);
@@ -27,6 +27,7 @@ public class infoRetriever {
 	private void getSite(String url) throws IOException {
 		for (String p : periods) {
 			Boolean firstRun = true;
+			recordCounter = 0;
 			int counter = 0;
 			int totalPages = 100;
 
