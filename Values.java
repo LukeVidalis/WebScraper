@@ -52,11 +52,10 @@ public class Values {
 	protected static final char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	
 	//Error Codes
-	//Website Link
 	protected static final String[] errorCodes = new String[]{"Error 1: Part of the matchup text is not recognized.", 
 			"Error 2: WebScrapper crashed while trying to get this bet.",
 			"Error 3: Number of odds doesn't match the number of matchups recognized.",
-			"Error 4: This bet is possibly an unrecognized accumulator."};
+			"Error 4: This bet is possibly an unrecognized accumulator or there is an issue with the odds field."};
 	
 	//Console messages
 	protected static final String listMsg = "The list of tipsters currently is: ";
