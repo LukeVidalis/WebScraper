@@ -27,7 +27,7 @@ public class infoRetriever {
 	private void getSite(String url) throws IOException {
 		for (String p : periods) {
 			Boolean firstRun = true;
-			int counter = 30;
+			int counter = 0;
 			int totalPages = 100;
 
 			System.out.println("Period: " + p);
