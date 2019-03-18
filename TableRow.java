@@ -59,7 +59,7 @@ public class TableRow {
 			if (multibet) {
 				return splitToString();
 			} else {
-				return contingencyMethod(4);
+				return contingencyMethod(3);
 
 			}
 		}
@@ -75,10 +75,10 @@ public class TableRow {
 		String[] dateSplit = (date.split("(?<=\\G............)"));
 		try {
 			if (ss.getError()) {
-				return contingencyMethod(1);
+				return contingencyMethod(0);
 
 			} else if (bets.size() != oddsSplit.length) {
-				return contingencyMethod(3);
+				return contingencyMethod(2);
 
 			} else {
 				for (int i = 0; i < bets.size(); i++) {
@@ -100,7 +100,7 @@ public class TableRow {
 				return s;
 			}
 		} catch (Exception e) {
-			return contingencyMethod(2);
+			return contingencyMethod(1);
 		}
 	}
 
