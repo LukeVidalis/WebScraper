@@ -16,16 +16,34 @@ public class infoRetriever {
 	private int recordCounter = 0;
 	private int maxBets = 0;
 
+<<<<<<< Updated upstream
 	public infoRetriever() throws IOException {
 		for (int i = 0; i < 4; i++) {
 			getPeriods(url[i]);
 			System.out.println("Tipster " + Values.url[i].substring(32, Values.url[i].length() - 1));
 			getSite(url[i]);
+=======
+	public infoRetriever(int[] input) throws IOException {
+		for (int i=0;i<input.length;i++) {
+			if(input[i] == 1) {
+				getPeriods(url[i]);
+				System.out.println("Tipster " + Values.url[i].substring(32, Values.url[i].length() - 1));
+				getSite(url[i]);
+			}
+>>>>>>> Stashed changes
 		}
+	}
+	
+	public infoRetriever(String tipster) throws IOException {
+		String url = "http://www.betfellas.gr/tipster/" + tipster + "/";
+		getPeriods(url);
+		System.out.println("Tipster " + tipster);
+		getSite(url);
 	}
 
 	private void getSite(String url) throws IOException {
 		for (String p : periods) {
+			recordCounter = 0;
 			Boolean firstRun = true;
 			recordCounter = 0;
 			int counter = 0;
